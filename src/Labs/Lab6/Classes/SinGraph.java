@@ -25,7 +25,7 @@ public class SinGraph extends JPanel {
         int centerY = HEIGHT / 2;
 
         g.setColor(Color.BLACK);
-//        ((Graphics2D)g).setStroke(new BasicStroke(3));
+        ((Graphics2D)g).setStroke(new BasicStroke(3));
         g.drawLine(0, centerY, WIDTH, centerY); // X-axis
         g.drawLine(centerX, 0, centerX, HEIGHT); // Y-axis
 
