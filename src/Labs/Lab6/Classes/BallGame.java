@@ -14,8 +14,8 @@ public class BallGame extends Game {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 var ball = new Ball("Ball1");
-                ball.transform.position.x = e.getX();
-                ball.transform.position.y = e.getY();
+                ball.transform.position.x = e.getX() - ball.transform.scale.x;
+                ball.transform.position.y = e.getY() - ball.transform.scale.y;
                 tree.add(ball);
             }
         });

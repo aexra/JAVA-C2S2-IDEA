@@ -19,13 +19,15 @@ public class Game extends JFrame {
 
     public Game(int width, int height) {
         this.tree = new SceneTree(this);
-        this.panel = new GamePanel();
+        this.panel = new GamePanel(this);
         this.backgroundColor = Color.white;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(width, height);
         add(this.panel);
         setVisible(true);
+
+
 
         _lastTimeMillis = System.currentTimeMillis();
         _gameTimer = new Timer(0, new ActionListener() {
@@ -61,18 +63,11 @@ public class Game extends JFrame {
         return this;
     }
 
-    @Override
-    public void paint(Graphics g) {
-        g.setColor(backgroundColor);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        tree.draw(g);
-    }
-
     private void animate() {
         var current = System.currentTimeMillis();
         this.deltaTime = current - _lastTimeMillis;
         _lastTimeMillis = current;
         tree.update(this.deltaTime);
-        repaint();
+        panel.repaint();
     }
 }
