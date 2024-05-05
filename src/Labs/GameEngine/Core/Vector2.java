@@ -1,4 +1,4 @@
-package Labs.Lab6.Classes;
+package Labs.GameEngine.Core;
 
 public class Vector2 {
     public float x = 0;

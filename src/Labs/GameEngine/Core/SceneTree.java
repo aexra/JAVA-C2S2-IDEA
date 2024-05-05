@@ -1,9 +1,9 @@
-package Labs.Lab6.Classes;
+package Labs.GameEngine.Core;
 
-import Labs.Lab6.BaseClasses.Game;
-import Labs.Lab6.BaseClasses.GameObject;
-import Labs.Lab6.Interfaces.ISceneTree;
-import Labs.Lab6.Interfaces.ISceneTreeNode;
+import Labs.GameEngine.BaseClasses.Game;
+import Labs.GameEngine.BaseClasses.GameObject;
+import Labs.GameEngine.Core.Interfaces.ISceneTree;
+import Labs.GameEngine.Core.Interfaces.ISceneTreeNode;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

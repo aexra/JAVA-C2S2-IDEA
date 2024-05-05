@@ -1,6 +1,7 @@
 package Labs.Lab6.Classes;
 
-import Labs.Lab6.BaseClasses.GameObject2D;
+import Labs.GameEngine.BaseClasses.GameObject2D;
+import Labs.GameEngine.Core.Vector2;
 
 import java.awt.*;
 import java.util.Random;

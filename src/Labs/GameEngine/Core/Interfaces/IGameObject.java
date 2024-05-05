@@ -1,4 +1,4 @@
-package Labs.Lab6.Interfaces;
+package Labs.GameEngine.Core.Interfaces;
 
 import java.awt.*;
 

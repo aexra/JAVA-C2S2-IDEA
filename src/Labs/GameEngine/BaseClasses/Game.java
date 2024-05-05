@@ -1,7 +1,6 @@
-package Labs.Lab6.BaseClasses;
+package Labs.GameEngine.BaseClasses;
 
-import Labs.Lab6.Classes.SceneTree;
-import Labs.Lab6.Classes.Vector2;
+import Labs.GameEngine.Core.SceneTree;
 
 import javax.swing.*;
 import java.awt.*;

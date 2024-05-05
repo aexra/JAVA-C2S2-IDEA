@@ -1,6 +1,6 @@
-package Labs.Lab6.Classes;
+package Labs.GameEngine.Core;
 
-import Labs.Lab6.BaseClasses.GameObject;
+import Labs.GameEngine.BaseClasses.GameObject;
 
 public class Scene extends GameObject {
     public Scene(String objectName) {

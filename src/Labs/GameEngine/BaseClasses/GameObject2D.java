@@ -1,4 +1,4 @@
-package Labs.Lab6.BaseClasses;
+package Labs.GameEngine.BaseClasses;
 
 import java.awt.*;
 

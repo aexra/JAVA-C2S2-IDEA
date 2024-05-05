@@ -1,8 +1,8 @@
-package Labs.Lab6.BaseClasses;
+package Labs.GameEngine.BaseClasses;
 
-import Labs.Lab6.Classes.Transform;
-import Labs.Lab6.Interfaces.IGameObject;
-import Labs.Lab6.Interfaces.ISceneTreeNode;
+import Labs.GameEngine.Core.Transform;
+import Labs.GameEngine.Core.Interfaces.IGameObject;
+import Labs.GameEngine.Core.Interfaces.ISceneTreeNode;
 
 import java.awt.*;
 import java.util.ArrayList;
