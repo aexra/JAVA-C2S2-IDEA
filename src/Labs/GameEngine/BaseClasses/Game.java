@@ -16,30 +16,25 @@ public class Game extends JFrame {
     private long _lastTimeMillis;
     private long deltaTime;
 
+    public Game() {
+        this._configure();
+    }
     public Game(int width, int height) {
-        this.tree = new SceneTree(this);
-        this.panel = new GamePanel(this);
-        this.backgroundColor = Color.white;
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(width, height);
-        add(this.panel);
-        setVisible(true);
-
-
-
-        _lastTimeMillis = System.currentTimeMillis();
-        _gameTimer = new Timer(0, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                animate();
-            }
-        });
-        _gameTimer.start();
+        this._configure(width, height);
     }
     public Game(GamePanel panel, int width, int height) {
-        this.tree = new SceneTree(this);
+        this._configure(panel, width, height);
+    }
+
+    private void _configure() {
+        this._configure(1000, 600);
+    }
+    private void _configure(int width, int height) {
+        this._configure(new GamePanel(this), width, height);
+    }
+    private void _configure(GamePanel panel, int width, int height) {
         this.panel = panel;
+        this.tree = new SceneTree(this);
         this.backgroundColor = Color.white;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
