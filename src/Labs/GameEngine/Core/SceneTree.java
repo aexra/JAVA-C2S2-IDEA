@@ -1,7 +1,7 @@
 package Labs.GameEngine.Core;
 
-import Labs.GameEngine.BaseClasses.Game;
-import Labs.GameEngine.BaseClasses.GameObject;
+import Labs.GameEngine.Core.Base.Game;
+import Labs.GameEngine.Core.Base.GameObject;
 import Labs.GameEngine.Core.Interfaces.ISceneTree;
 import Labs.GameEngine.Core.Interfaces.ISceneTreeNode;
 import org.jetbrains.annotations.NotNull;

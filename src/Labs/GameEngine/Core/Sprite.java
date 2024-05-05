@@ -1,12 +1,11 @@
 package Labs.GameEngine.Core;
 
-import Labs.GameEngine.BaseClasses.GameObject2D;
+import Labs.GameEngine.Core.Base.GameObject2D;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class Sprite extends GameObject2D {
     protected BufferedImage image;

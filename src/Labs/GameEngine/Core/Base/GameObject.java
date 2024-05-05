@@ -1,4 +1,4 @@
-package Labs.GameEngine.BaseClasses;
+package Labs.GameEngine.Core.Base;
 
 import Labs.GameEngine.Core.Transform;
 import Labs.GameEngine.Core.Interfaces.IGameObject;

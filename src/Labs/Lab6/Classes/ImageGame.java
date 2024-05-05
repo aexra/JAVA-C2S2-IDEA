@@ -1,6 +1,6 @@
 package Labs.Lab6.Classes;
 
-import Labs.GameEngine.BaseClasses.Game;
+import Labs.GameEngine.Core.Base.Game;
 import Labs.GameEngine.Core.Sprite;
 import Labs.GameEngine.Core.Vector2;
 

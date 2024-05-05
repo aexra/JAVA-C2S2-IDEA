@@ -1,6 +1,6 @@
 package Labs.GameEngine.Core.Interfaces;
 
-import Labs.GameEngine.BaseClasses.GameObject;
+import Labs.GameEngine.Core.Base.GameObject;
 
 public interface ISceneTreeNode {
     public GameObject add(GameObject object);

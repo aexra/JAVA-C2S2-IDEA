@@ -1,4 +1,4 @@
-package Labs.GameEngine.BaseClasses;
+package Labs.GameEngine.Core.Base;
 
 import javax.swing.*;
 import java.awt.*;

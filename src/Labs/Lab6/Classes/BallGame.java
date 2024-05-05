@@ -1,6 +1,6 @@
 package Labs.Lab6.Classes;
 
-import Labs.GameEngine.BaseClasses.Game;
+import Labs.GameEngine.Core.Base.Game;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
