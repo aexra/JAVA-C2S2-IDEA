@@ -56,8 +56,10 @@ public class ImageGame extends Game {
 
                 switch (mode) {
                     case BLUR:
+                        blur();
                         break;
                     case GRAY:
+                        gray();
                         break;
                     case ROTATE:
                         rotate();
