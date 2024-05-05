@@ -4,11 +4,13 @@ import Labs.GameEngine.Core.Base.GameObject2D;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Sprite extends GameObject2D {
-    protected BufferedImage image;
+    public BufferedImage image;
 
     public Sprite(String path) {
         super(path);
@@ -26,6 +28,22 @@ public class Sprite extends GameObject2D {
         catch (Exception _) {
             System.out.println("Ошибка загрузки изображения: файл не найден " + path);
         }
+    }
+
+    public void flipX() {
+        AffineTransform tx;
+        tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-image.getWidth(null), 0);
+        var op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        image = op.filter(image, null);
+    }
+
+    public void flipY() {
+        AffineTransform tx;
+        tx = AffineTransform.getScaleInstance(1, -1);
+        tx.translate(0, -image.getHeight(null));
+        var op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        image = op.filter(image, null);
     }
 
     @Override
