@@ -26,7 +26,8 @@ public class Ball extends GameObject2D {
         super(objectName);
         var rnd = new Random();
         velocity = new Vector2(rnd.nextFloat() * (rnd.nextFloat() > 0.5? 1 : -1), rnd.nextFloat() * (rnd.nextFloat() > 0.5? 1 : -1));
-        transform.scale = new Vector2(50, 50);
+        var size = rnd.nextInt(10, 100);
+        transform.scale = new Vector2(size, size);
         this.color = colors[rnd.nextInt(0, colors.length)];
     }
 
