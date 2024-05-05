@@ -49,6 +49,9 @@ public class Game extends JFrame {
                 animate();
             }
         });
+
+        this.start();
+
         _gameTimer.start();
     }
 
@@ -57,10 +60,14 @@ public class Game extends JFrame {
         return this;
     }
 
+    public void start() {}
+    public void beforeUpdate(long deltaTime) {}
+
     private void animate() {
         var current = System.currentTimeMillis();
         this.deltaTime = current - _lastTimeMillis;
         _lastTimeMillis = current;
+        this.beforeUpdate(deltaTime);
         tree.update(this.deltaTime);
         panel.repaint();
     }

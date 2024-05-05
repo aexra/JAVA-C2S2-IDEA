@@ -19,7 +19,7 @@ public class ImageContainer extends JPanel {
 
     public ImageContainer() throws IOException {
         frame = new JFrame();
-        image = ImageIO.read(new File("./src/Labs/Lab6/Assets/WiseTree.png"));
+        image = ImageIO.read(new File("./src/Labs/Lab6/Assets/WiseTree.jpg"));
 
         frame.addMouseListener(new MouseAdapter() {
             @Override
