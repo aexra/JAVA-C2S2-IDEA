@@ -5,25 +5,25 @@ import Labs.GameEngine.Core.Sprite;
 import Labs.GameEngine.Core.Vector2;
 import Labs.Lab6.Enums.eModificationType;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 public class ImageGame extends Game {
-    private Sprite image;
+    private Sprite sprite;
     private eModificationType mode;
 
     @Override
     public void start() {
         super.start();
 
-        image = new Sprite("./src/Labs/Lab6/Assets/WiseTree.jpg");
-        image.transform.scale = new Vector2(500, 500);
+        sprite = new Sprite("./src/Labs/Lab6/Assets/WiseTree.jpg");
+        sprite.transform.scale = new Vector2(500, 500);
 
-        tree.add(image);
+        tree.add(sprite);
 
         mode = eModificationType.ROTATE;
 
@@ -56,7 +56,7 @@ public class ImageGame extends Game {
 
                 switch (mode) {
                     case BLUR:
-                        blur();
+                        blur(3);
                         break;
                     case GRAY:
                         gray();
@@ -74,20 +74,68 @@ public class ImageGame extends Game {
     @Override
     public void beforeUpdate(long deltaTime) {
         super.beforeUpdate(deltaTime);
-        image.transform.scale.x = getWidth();
-        image.transform.scale.y = getHeight();
+        sprite.transform.scale.x = getWidth();
+        sprite.transform.scale.y = getHeight();
     }
 
     public void gray() {
+        int width = sprite.source.getWidth();
+        int height = sprite.source.getHeight();
+
+        BufferedImage grayscaleImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = new Color(sprite.source.getRGB(x, y));
+                int gray = (int) (color.getRed() * 0.299 + color.getGreen() * 0.587 + color.getBlue() * 0.114);
+                Color grayColor = new Color(gray, gray, gray);
+                grayscaleImage.setRGB(x, y, grayColor.getRGB());
+            }
+        }
+
+        sprite.source = grayscaleImage;
+
         System.out.println("Применен GRAY метод");
     }
 
-    public void blur() {
+    public void blur(int intensity) {
+        int width = sprite.source.getWidth();
+        int height = sprite.source.getHeight();
+
+        BufferedImage blurredImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int red = 0, green = 0, blue = 0;
+                int count = 0;
+                for (int dy = -intensity; dy <= intensity; dy++) {
+                    for (int dx = -intensity; dx <= intensity; dx++) {
+                        int nx = x + dx;
+                        int ny = y + dy;
+                        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                            Color color = new Color(sprite.source.getRGB(nx, ny));
+                            red += color.getRed();
+                            green += color.getGreen();
+                            blue += color.getBlue();
+                            count++;
+                        }
+                    }
+                }
+                red /= count;
+                green /= count;
+                blue /= count;
+                Color avgColor = new Color(red, green, blue);
+                blurredImage.setRGB(x, y, avgColor.getRGB());
+            }
+        }
+
+        sprite.source = blurredImage;
+
         System.out.println("Применен BLUR метод");
     }
 
     public void rotate() {
-        image.flipX();
+        sprite.flipX();
         System.out.println("Применен ROTATE метод");
     }
 }
