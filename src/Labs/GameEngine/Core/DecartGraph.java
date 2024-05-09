@@ -69,7 +69,7 @@ public class DecartGraph extends GameObject2D {
         drawFunctions(g2, scaleX, scaleY);
     }
 
-    public void drawAxes(Graphics2D g2, double scaleX, double scaleY) {
+    private void drawAxes(Graphics2D g2, double scaleX, double scaleY) {
 
         // DRAW AXIS LINES
         if (drawAxis) {
@@ -124,7 +124,7 @@ public class DecartGraph extends GameObject2D {
         }
     }
 
-    public void drawFunctions(Graphics2D g2, double scaleX, double scaleY) {
+    private void drawFunctions(Graphics2D g2, double scaleX, double scaleY) {
         for (var member : functions) {
             g2.setColor(member.strokeColor);
             var values = member.getY(xInterval.x, xInterval.y, simStep);

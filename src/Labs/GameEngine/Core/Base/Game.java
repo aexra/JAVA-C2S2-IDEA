@@ -41,7 +41,9 @@ public class Game extends JFrame {
         setSize(width, height);
         add(this.panel);
         setVisible(true);
+    }
 
+    public Game run() {
         _lastTimeMillis = System.currentTimeMillis();
         _gameTimer = new Timer(0, new ActionListener() {
             @Override
@@ -51,12 +53,7 @@ public class Game extends JFrame {
         });
 
         this.start();
-
         _gameTimer.start();
-    }
-
-    public Game run() {
-
         return this;
     }
 
