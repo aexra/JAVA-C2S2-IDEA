@@ -12,6 +12,13 @@ public class DecartGraphMember implements IDecartGraphMember {
     public ArrayList<Vector2> simulatedPoints;
     public Vector3 lastSimulationSignature;
 
+    public String name = this.getClass().getName();
+
+    public boolean visible = true;
+
+    public DecartGraphMember() {}
+    public DecartGraphMember(String name) { this.name = name; }
+
     @Override
     public final ArrayList<Vector2> getY(float start, float end, float step) {
         var sig = new Vector3(start, end, step);
@@ -35,5 +42,5 @@ public class DecartGraphMember implements IDecartGraphMember {
         return true;
     }
 
-
+    public String toString() { return name; }
 }

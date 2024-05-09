@@ -10,6 +10,10 @@ public class DecartGraphCurve extends DecartGraphMember {
     public DecartGraphCurve(IFunction2D func) {
         this.function = func;
     }
+    public DecartGraphCurve(IFunction2D func, String name) {
+        super(name);
+        this.function = func;
+    }
 
     @Override
     public ArrayList<Vector2> simulate(Vector3 sig) {

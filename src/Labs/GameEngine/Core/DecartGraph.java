@@ -85,8 +85,10 @@ public class DecartGraph extends GameObject2D {
         // DRAW AXIS NUMBERS
         if (describeAxis) {
             g2.setColor(axisNumberColor);
-            var incrementor = zoom < 1? (int)(1 / zoom) : 1;
-            var startX = zoom < 1? (int)xInterval.x : xInterval.x;
+//            var incrementor = zoom < 1? (int)(1 / zoom) : 1;
+            var incrementor = 1;
+//            var startX = zoom < 1? (int)xInterval.x : xInterval.x;
+            var startX = (int)xInterval.x;
             var xIterator = startX;
             while (xIterator < xInterval.y) {
                 xIterator += incrementor;
@@ -98,6 +100,7 @@ public class DecartGraph extends GameObject2D {
 
     private void drawFunctions(Graphics2D g2, double scaleX, double scaleY) {
         for (var member : functions) {
+            if (!member.visible) continue;
             g2.setColor(member.strokeColor);
             var values = member.getY(xInterval.x, xInterval.y, simStep);
             for (var point : values) {
