@@ -7,15 +7,19 @@ import java.util.ArrayList;
 
 public class DecartGraph extends GameObject2D {
 
+    // LIST OF FUNCTIONS
     public ArrayList<DecartGraphMember> functions;
-    public Vector2 xInterval = new Vector2(-10, 10);
+
+    // DRAWING VARIABLES
+    public float zoom = 1f;
+    public Vector2 xInterval = new Vector2(-5, 5);
     public float simStep = 0.1f;
-    public Vector2 margin = new Vector2(20, 20);
-    public float zoom = 2f;
+
 
     // FLAGS
     public boolean drawAxis = true;
     public boolean describeAxis = true;
+    public boolean manualInterval = false;
 
     // COLORS
     public Color backgroundColor = Color.WHITE;
@@ -32,18 +36,32 @@ public class DecartGraph extends GameObject2D {
     }
 
     @Override
+    public void update(long deltaTime) {
+        super.update(deltaTime);
+
+        // Пусть при zoom = 1 наш xInterval принимает значения от -5 до 5
+        // Тогда..
+
+        if (!manualInterval) {
+            xInterval.x = -5 / zoom;
+            xInterval.y = 5 / zoom;
+            simStep = 0.001f / zoom;
+        }
+    }
+
+    @Override
     public void draw(Graphics2D g2) {
         super.draw(g2);
 
         g2.setColor(backgroundColor);
         g2.fillRect((int)transform.position.x, (int)transform.position.y, (int)transform.scale.x, (int)transform.scale.y);
 
-        var scaleX = (transform.scale.x - margin.x) / Math.PI * zoom;
-        var scaleY = (double)(transform.scale.y - margin.y) * zoom;
+        var scaleX = (transform.scale.x) / Math.PI;
+        var scaleY = (double)(transform.scale.y);
 
         var aspect = scaleX / scaleY;
 
-        scaleX /= xInterval.y - xInterval.x;
+        scaleX *= zoom;
 
         scaleY = scaleX / aspect;
 
@@ -67,34 +85,42 @@ public class DecartGraph extends GameObject2D {
         // DRAW AXIS NUMBERS
         if (describeAxis) {
             g2.setColor(axisNumberColor);
-
+            var incrementor = zoom < 1? (int)(1 / zoom) : 1;
+            var startX = zoom < 1? (int)xInterval.x : xInterval.x;
+            System.out.println(Float.toString(zoom) + ", " + Float.toString(incrementor));
             // draws numbers at Ox axis
-            for (var x = (int)xInterval.x; x <= (int)xInterval.y; x++) {
-                g2.drawString(Integer.toString(x), (int)(x * scaleX + pivot.x), (int)pivot.y);
+//            for (var x = (int)xInterval.x; x <= (int)xInterval.y; x += incrementor) {
+//                g2.drawString(Integer.toString(x), (int)(x * scaleX + pivot.x), (int)pivot.y);
+//            }
+            var xIterator = startX;
+            while (xIterator < xInterval.y) {
+                xIterator += incrementor;
+                g2.drawString(Float.toString(xIterator), (int)(xIterator * scaleX + pivot.x), (int)pivot.y);
+                g2.drawString(Float.toString(xIterator), (int)pivot.x, (int)(xIterator * scaleY + pivot.y));
             }
 
             // draws numbers at Oy axis
-            var allY = new ArrayList<Float>();
-            for (var func : functions) {
-                for (var point : func.getY(xInterval.x, xInterval.y, simStep)) {
-                    allY.add(point.y);
-                }
-            }
-            var minY = allY.getFirst(); // the first value of Y interval
-            var maxY = allY.getFirst(); // the last value of Y interval
-            for (var y : allY) {
-                if (y < minY) {
-                    minY = y;
-                    continue;
-                }
-                if (y > maxY) {
-                    maxY = y;
-                    continue;
-                }
-            }
-            for (var y = minY.intValue(); y <= maxY.intValue(); y++) {
-                g2.drawString(Integer.toString(y), (int)pivot.x, (int)(y * scaleY + pivot.y));
-            }
+//            var allY = new ArrayList<Float>();
+//            for (var func : functions) {
+//                for (var point : func.getY(xInterval.x, xInterval.y, simStep)) {
+//                    allY.add(point.y);
+//                }
+//            }
+//            var minY = allY.getFirst(); // the first value of Y interval
+//            var maxY = allY.getFirst(); // the last value of Y interval
+//            for (var y : allY) {
+//                if (y < minY) {
+//                    minY = y;
+//                    continue;
+//                }
+//                if (y > maxY) {
+//                    maxY = y;
+//                    continue;
+//                }
+//            }
+//            for (var y = minY.intValue(); y <= maxY.intValue(); y += incrementor) {
+//                g2.drawString(Integer.toString(y), (int)pivot.x, (int)(y * scaleY + pivot.y));
+//            }
         }
     }
 

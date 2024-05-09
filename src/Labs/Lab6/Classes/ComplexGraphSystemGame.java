@@ -17,9 +17,6 @@ public class ComplexGraphSystemGame extends Game {
     public ComplexGraphSystemGame() {
         super();
         graph = new DecartGraph("Graph");
-        graph.simStep = 0.001f;
-        graph.xInterval.x = -10;
-        graph.xInterval.y = 10;
 
         graph.backgroundColor = Color.darkGray;
         graph.axisStrokeColor = Color.gray;
@@ -39,11 +36,11 @@ public class ComplexGraphSystemGame extends Game {
                 super.mouseWheelMoved(e);
                 var scroll = e.getWheelRotation();
                 if (scroll > 0) {
-                    graph.zoom += 0.1f;
+                    graph.zoom -= graph.zoom / 10;
                 }
                 else if (scroll < 0)
                 {
-                    graph.zoom -= 0.1f;
+                    graph.zoom += graph.zoom / 10;
                 }
             }
         });
