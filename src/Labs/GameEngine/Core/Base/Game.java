@@ -12,6 +12,9 @@ public class Game extends JFrame {
     public SceneTree tree;
     public Color backgroundColor;
 
+    public boolean updating = true;
+    public boolean drawing = true;
+
     private Timer _gameTimer;
     private long _lastTimeMillis;
     private long deltaTime;
@@ -67,7 +70,7 @@ public class Game extends JFrame {
         this.deltaTime = current - _lastTimeMillis;
         _lastTimeMillis = current;
         this.beforeUpdate(deltaTime);
-        tree.update(this.deltaTime);
-        panel.repaint();
+        if (updating) tree.update(this.deltaTime);
+        if (drawing) panel.repaint();
     }
 }
