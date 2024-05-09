@@ -104,7 +104,7 @@ public class DecartGraph extends GameObject2D {
             g2.setColor(member.strokeColor);
             var values = member.getY(xInterval.x, xInterval.y, simStep);
             for (var point : values) {
-                g2.drawRect((int)(point.x * scaleX + pivot.x), (int)(point.y * scaleY + pivot.y), 1, 1);
+                g2.drawRect((int)(point.x * scaleX + pivot.x), (int)(- point.y * scaleY + pivot.y), 1, 1);
             }
         }
     }
