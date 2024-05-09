@@ -6,6 +6,8 @@ import Labs.GameEngine.Core.DecartGraphCurve;
 import Labs.GameEngine.Core.Vector2;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseWheelEvent;
 
 import static java.lang.Math.sin;
 
@@ -15,19 +17,44 @@ public class ComplexGraphSystemGame extends Game {
     public ComplexGraphSystemGame() {
         super();
         graph = new DecartGraph("Graph");
-        graph.add(new DecartGraphCurve((x) -> (float)-sin(x)));
         graph.simStep = 0.001f;
         graph.xInterval.x = -10;
         graph.xInterval.y = 10;
 
+        graph.backgroundColor = Color.darkGray;
+        graph.axisStrokeColor = Color.gray;
+        graph.axisNumberColor = Color.white;
+
         graph.transform.scale = new Vector2(getWidth(), getHeight());
 
+        var curve = new DecartGraphCurve((x) -> (float)-sin(x));
+        curve.strokeColor = Color.getHSBColor(180, 0.79f, 0.81f);
+        graph.add(curve);
+
         tree.add(graph);
+
+        addMouseWheelListener(new MouseAdapter() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                super.mouseWheelMoved(e);
+                var scroll = e.getWheelRotation();
+                if (scroll > 0) {
+                    graph.zoom += 0.1f;
+                }
+                else if (scroll < 0)
+                {
+                    graph.zoom -= 0.1f;
+                }
+            }
+        });
     }
 
     @Override
     public void beforeUpdate(long deltaTime) {
-        graph.pivot.x = (float) panel.getWidth() / 2;
-        graph.pivot.y = (float) panel.getHeight() / 2;
+        graph.transform.scale.x = panel.getWidth();
+        graph.transform.scale.y = panel.getHeight();
+
+        graph.pivot.x = graph.transform.scale.x / 2;
+        graph.pivot.y = graph.transform.scale.y / 2;
     }
 }
