@@ -15,6 +15,7 @@ public class Game extends JFrame {
     private Timer _gameTimer;
     private long _lastTimeMillis;
     private long deltaTime;
+    protected int _timerDelay = 0;
 
     public Game() {
         this._configure();
@@ -34,6 +35,7 @@ public class Game extends JFrame {
     }
     private void _configure(GamePanel panel, int width, int height) {
         this.panel = panel;
+        this.panel.game = this;
         this.tree = new SceneTree(this);
         this.backgroundColor = Color.white;
 
@@ -45,7 +47,7 @@ public class Game extends JFrame {
 
     public Game run() {
         _lastTimeMillis = System.currentTimeMillis();
-        _gameTimer = new Timer(0, new ActionListener() {
+        _gameTimer = new Timer(_timerDelay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 animate();

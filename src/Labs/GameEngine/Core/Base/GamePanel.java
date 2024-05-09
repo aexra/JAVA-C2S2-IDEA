@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    private Game game;
+    public Game game;
 
+    public GamePanel() {}
     public GamePanel(Game game) { this.game = game; }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         g.setColor(game.backgroundColor);
         g.fillRect(0, 0, getWidth(), getHeight());
         game.tree.draw(g);
