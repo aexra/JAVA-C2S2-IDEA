@@ -4,22 +4,28 @@ import Labs.GameEngine.Core.Transform;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class MyComponent extends JPanel {
+public class StrangePanel extends JPanel {
     public Transform transform;
     public Color backgroundColor = Color.WHITE;
     public JLabel upperLabel;
     public JLabel centerLabel;
     public JLabel downLabel;
 
-    public MyComponent() {
+    public StrangePanel() {
+        _configure("Upper", "Center", "Lower");
+    }
+
+    public StrangePanel(String upper, String center, String lower) {
+        _configure(upper, center, lower);
+    }
+
+    private void _configure(String upper, String center, String lower) {
         transform = new Transform();
 
-        upperLabel = new JLabel("Upper Label");
-        centerLabel = new JLabel("Center Label");
-        downLabel = new JLabel("Down Label");
+        upperLabel = new JLabel(upper);
+        centerLabel = new JLabel(center);
+        downLabel = new JLabel(lower);
 
         upperLabel.setFont(new Font("MONTSERRAT", Font.BOLD | Font.ITALIC, 10));
         centerLabel.setFont(new Font("MONTSERRAT", Font.BOLD, 18));

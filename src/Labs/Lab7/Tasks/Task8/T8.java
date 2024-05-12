@@ -1,20 +1,21 @@
-package Labs.Lab7.Tasks.Task5;
+package Labs.Lab7.Tasks.Task8;
 
 import Labs.GameEngine.Core.Vector2;
 import Labs.Lab7.Tasks.Task5.Classes.StrangePanel;
+import Labs.Lab7.Tasks.Task8.Classes.MonoGamePanel;
 
 import javax.swing.*;
 
-public class T5 {
+public class T8 {
     private JFrame frame;
     private Vector2 size = new Vector2(1600, 1000);
 
-    public T5() {
+    public T8() {
         frame = new JFrame();
 
-        var comp = new StrangePanel();
+        var game = new MonoGamePanel();
 
-        frame.add(comp);
+        frame.add(game);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize((int)size.x, (int)size.y);
@@ -22,6 +23,6 @@ public class T5 {
     }
 
     public static void main(String[] args) {
-        new T5();
+        new T8();
     }
 }
