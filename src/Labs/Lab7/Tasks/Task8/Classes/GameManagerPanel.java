@@ -169,6 +169,9 @@ public class GameManagerPanel extends JPanel {
     }
 
     private void finish() {
-
+        var dialog = new JDialog();
+        dialog.add(new JLabel(score1 > score2? "Победил player1 со счетом " + score1 + " против " + score2 + " у player2" : score1 < score2? "Победил player2 со счетом " + score2 + " против " + score1 + " у player1" : "Ничья со счетом " + score1));
+        dialog.setSize(new Dimension(400, 100));
+        dialog.setVisible(true);
     }
 }
