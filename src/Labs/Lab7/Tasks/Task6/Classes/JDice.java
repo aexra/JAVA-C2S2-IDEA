@@ -4,6 +4,8 @@ import Labs.GameEngine.Core.Vector2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
@@ -21,6 +23,7 @@ public class JDice extends JPanel {
 
     private GridLayout layout;
     private Random rnd;
+    private int r;
 
     public JDice() {
         rnd = new Random();
@@ -28,6 +31,14 @@ public class JDice extends JPanel {
         onDraw = this::onDraw;
 
         redraw();
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                reconfigure();
+            }
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -50,6 +61,14 @@ public class JDice extends JPanel {
     }
 
     private void onDraw(int value) {}
+
+    public void reconfigure() {
+        var rowHeight = (int)(getHeight() / 3);
+        var columnWidth = (int)(getWidth() / 3);
+
+        r = Math.min(rowHeight, columnWidth);
+        r -= (int) (r * pointsSpacing);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -125,9 +144,6 @@ public class JDice extends JPanel {
 
         var rowHeight = (int)(getHeight() / grid.x);
         var columnWidth = (int)(getWidth() / grid.y);
-
-        var r = Math.min(rowHeight, columnWidth);
-        r -= (int) (r * pointsSpacing);
 
         var xpadding = (int)(columnWidth - r) / 2;
         var ypadding = (int)(rowHeight - r) / 2;

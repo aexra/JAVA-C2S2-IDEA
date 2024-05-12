@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class T8 {
     private JFrame frame;
-    private Vector2 size = new Vector2(1600, 1000);
+    private Vector2 size = new Vector2(1000, 1000);
 
     public T8() {
         frame = new JFrame();
