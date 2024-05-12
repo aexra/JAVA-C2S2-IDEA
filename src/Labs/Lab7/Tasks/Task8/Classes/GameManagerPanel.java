@@ -22,7 +22,17 @@ public class GameManagerPanel extends JPanel {
 
     private GridLayout layout;
 
-    public GameManagerPanel() {
+    private int score1 = 0;
+    private int score2 = 0;
+
+    private int pos1 = 0;
+    private int pos2 = 0;
+
+    private MonoGamePanel mgp;
+
+    public GameManagerPanel(MonoGamePanel mgp) {
+        this.mgp = mgp;
+
         label1 = new JLabel("Player1");
         label2 = new JLabel("Player2");
         scoreLabel1 = new JLabel("Score");
@@ -36,6 +46,8 @@ public class GameManagerPanel extends JPanel {
 
         dice1.pointsSpacing = 0.5f;
         dice2.pointsSpacing = 0.5f;
+
+        disableDice2();
 
         label1.setHorizontalAlignment(JLabel.CENTER);
         label2.setHorizontalAlignment(JLabel.CENTER);
@@ -62,5 +74,101 @@ public class GameManagerPanel extends JPanel {
         add(scoreLabel2);
         add(scoreValueLabel1);
         add(scoreValueLabel2);
+
+        dice1.onDraw = (value) -> {
+            mgp.panels[pos1].upperLabel.setText("");
+            pos1 += value;
+            pos1 = pos1 % 8;
+            mgp.panels[pos1].upperLabel.setText("Player1");
+
+            switch (pos1) {
+                case 0:
+                    score1 += 20;
+                    break;
+                case 2:
+                    score1 -= 50;
+                    break;
+                case 3:
+                    score1 = 0;
+                    break;
+                case 4:
+                    score1 += 30;
+                    break;
+                case 5:
+                    score1 += 10;
+                    break;
+                case 6:
+                    score1 -= 10;
+                    break;
+                case 7:
+                    finish();
+                    break;
+            }
+
+            scoreValueLabel1.setText(Integer.toString(score1));
+
+            disableDice1();
+            enableDice2();
+        };
+        dice2.onDraw = (value) -> {
+            mgp.panels[pos2].downLabel.setText("");
+            pos2 += value;
+            pos2 = pos2 % 8;
+            mgp.panels[pos2].downLabel.setText("Player2");
+
+            switch (pos2) {
+                case 0:
+                    score2 += 20;
+                    break;
+                case 2:
+                    score2 -= 50;
+                    break;
+                case 3:
+                    score2 = 0;
+                    break;
+                case 4:
+                    score2 += 30;
+                    break;
+                case 5:
+                    score2 += 10;
+                    break;
+                case 6:
+                    score2 -= 10;
+                    break;
+                case 7:
+                    finish();
+                    break;
+            }
+
+            scoreValueLabel2.setText(Integer.toString(score2));
+
+            disableDice2();
+            enableDice1();
+        };
+    }
+
+    private void disableDice1() {
+        dice1.backgroundColor = Color.RED;
+        dice1.isActive = false;
+        dice1.repaint();
+    }
+    private void disableDice2() {
+        dice2.backgroundColor = Color.RED;
+        dice2.isActive = false;
+        dice2.repaint();
+    }
+    private void enableDice1() {
+        dice1.backgroundColor = Color.WHITE;
+        dice1.isActive = true;
+        dice1.repaint();
+    }
+    private void enableDice2() {
+        dice2.backgroundColor = Color.WHITE;
+        dice2.isActive = true;
+        dice2.repaint();
+    }
+
+    private void finish() {
+
     }
 }
